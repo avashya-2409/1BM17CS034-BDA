@@ -1,0 +1,71 @@
+Experiment 1:Solutions
+
+
+1.CREATE KEYSPACE Employee1 WITH REPLICATION ={'class':'SimpleStrategy','replication_factor':1};
+
+
+
+2.USE Employee1
+ CREATE TABLE Employee_info(Emp_Id int Primary Key, Emp_Name text, Designation text,        Date_of_Joining timestamp, Salary double, Dept_Name text):
+
+
+
+
+3.BEGIN BATCH INSERT INTO Employee_info(Emp_Id,Emp_name,designation,Date_of_joining,Salary,Dept_name) VALUES (1,'Aviana','Manager','2020-12-15',1000,'Finance') INSERT INTO Employee_info(Emp_Id,Emp_name,designation,Date_of_joining,Salary,Dept_name) VALUES(2,'Amara','Manager','2020-12-17',2000,'Finance') INSERT INTO Employee_info(Emp_Id,Emp_name,designation,Date_of_joining,Salary,Dept_name) VALUES (3,'Samara','Project Manager','2020-12-18',2000,'Finance') APPLY BATCH;
+cqlsh:employee1> SELECT * FROM Employee_info;
+
+ emp_id | date_of_joining                 | dept_name | designation     | emp_name | salary
+--------+---------------------------------+-----------+-----------------+----------+--------
+      1 | 2020-12-14 18:30:00.000000+0000 |   Finance |         Manager |   Aviana |   1000
+      2 | 2020-12-16 18:30:00.000000+0000 |   Finance |         Manager |    Amara |   2000
+      3 | 2020-12-17 18:30:00.000000+0000 |   Finance | Project Manager |   Samara |   2000
+
+
+
+
+
+
+4.UPDATE Employee_info SET Emp_name ='Samara' WHERE Emp_Id=3;
+cqlsh:employee1> UPDATE Employee_info SET Emp_name ='Aviana' WHERE Emp_Id=1;
+cqlsh:employee1> SELECT * FROM Employee_info;
+
+ emp_id | date_of_joining                 | dept_name | designation     | emp_name | salary
+--------+---------------------------------+-----------+-----------------+----------+--------
+      1 | 2020-12-14 18:30:00.000000+0000 |   Finance |         Manager |   Aviana |   1000
+      2 | 2020-12-16 18:30:00.000000+0000 |   Finance |         Manager |    Amara |   2000
+      3 | 2020-12-17 18:30:00.000000+0000 |   Finance | Project Manager |   Samara |   2000
+
+
+
+
+
+
+
+6.ALTER TABLE Employee_info ADD Projects list<text>;
+cqlsh:employee1> SELECT * FROM Employee_info;
+
+ emp_id | date_of_joining                 | dept_name | designation     | emp_name | projects | salary
+--------+---------------------------------+-----------+-----------------+----------+----------+--------
+      1 | 2020-12-14 18:30:00.000000+0000 |   Finance |         Manager |   Aviana |     null |   1000
+      2 | 2020-12-16 18:30:00.000000+0000 |   Finance |         Manager |    Amara |     null |   2000
+      3 | 2020-12-17 18:30:00.000000+0000 |   Finance | Project Manager |   Samara |     null |   2000
+
+ 
+
+
+
+
+7. UPDATE Employee_info SET Projects =['MUY,VUY'] WHERE Emp_Id=1;
+cqlsh:employee1> SELECT * FROM Employee_info;
+
+ emp_id | date_of_joining                 | dept_name | designation     | emp_name | projects    | salary
+--------+---------------------------------+-----------+-----------------+----------+-------------+--------
+      1 | 2020-12-14 18:30:00.000000+0000 |   Finance |         Manager |   Aviana | ['MUY,VUY'] |   1000
+      2 | 2020-12-16 18:30:00.000000+0000 |   Finance |         Manager |    Amara |        null |   2000
+      3 | 2020-12-17 18:30:00.000000+0000 |   Finance | Project Manager |   Samara |        null |   2000
+
+
+
+
+
+8.
