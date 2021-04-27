@@ -1,0 +1,82 @@
+
+
+1.use StudentDB
+
+2. insertion
+
+db.Student.insertOne(
+{
+    name:"ABC",
+    roll_no:11,
+    age:18,
+    contact:8927566621,
+    email_id:"abc@gmail.com"
+}
+)
+
+db.Student.insertMany([
+{   name:"ARUN",
+    roll_no:12,
+    age:18,
+    contact:8927566333,
+    email_id:"arun@gmail.com"
+    },
+    {
+    name:"ABHI",
+    roll_no:13,
+    age:19,
+    contact:8983466621,
+    email_id:"abhi@gmail.com"
+        },
+    {
+    name:"SEEMA",
+    roll_no:15,
+    age:18,
+    contact:9927566621,
+    email_id:"seema@gmail.com"
+    },
+    {
+    name:"SAFA",
+    roll_no:16,
+    age:18,
+    contact:9027566621,
+    email_id:"safa@gmail.com"
+    }
+    ])
+    
+    
+db.Student.insertOne(
+{
+    name:"ANU",
+    roll_no:10,
+    age:18,
+    contact:8988866621,
+    email_id:"anuu@gmail.com"
+}
+)
+
+
+3.update
+
+db.Student.updateOne(
+   { roll_no: 10 },
+   {
+     $set: { "email_id": "anu@gmail.com"}
+   }
+)
+
+4./*update*/
+ db.Student.updateOne(
+   { roll_no: 11 },
+   {
+     $set: { "name": "FEM"}
+   }
+)
+
+5./*export*/
+
+mongoexport --db=StudentDB --collection=Student --type=csv --fields=name,roll_no,age,contact,email_id --out=C:\Users\Ankitha\Desktop\student.csv
+
+6.
+
+db.students.drop()
